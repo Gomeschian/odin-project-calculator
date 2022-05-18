@@ -1,0 +1,40 @@
+html{
+    box-sizing: border-box;
+}
+
+.container{
+    width: fit-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-style: solid;
+}
+
+.keypadContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen{
+    display: flex;
+    height: fit-content;
+    justify-content: center;
+    align-items: flex-end;
+    border-style: solid;
+    font-weight: bolder;
+    font-size: 4em;
+}
+
+.keypad{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.key{
+    width:100px;
+    height: 100px;
+    font-weight: bolder;
+    font-size: large;
+}
