@@ -18,13 +18,12 @@ html{
 }
 
 .screen{
-    display: flex;
-    height: fit-content;
-    justify-content: center;
-    align-items: flex-end;
+    width: 394px;
+    height: 60px;
+    text-align: end;
     border-style: solid;
     font-weight: bolder;
-    font-size: 4em;
+    font-size: 60px;
 }
 
 .keypad{

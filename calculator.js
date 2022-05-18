@@ -1,3 +1,18 @@
+let displayValue = "";
+const keys = Array.from(document.querySelectorAll(".key"));
+const display = document.querySelector(".screen");
+
+const updateDisplay = function(e)
+{
+  displayValue = e.target.textContent;
+  if (e.target.textContent === "Clear")
+  {
+    displayValue = "";
+    return display.textContent = "";
+  }  
+  display.textContent += displayValue;
+}
+
 const add = function(num1, num2) {
 	return num1 + num2;
 };
@@ -38,3 +53,7 @@ const operate = function(operator, number1, number2) {
     return divide(number1, number2);
   }
 };
+keys.forEach(key => key.addEventListener("click",(e) =>
+{
+  return updateDisplay(e);
+}));
