@@ -1,17 +1,59 @@
 let displayValue = "";
+let firstNumber = "";
+let secondNumber = "";
+let operator = "";
+let lastButtonPressed = "";
 const keys = Array.from(document.querySelectorAll(".key"));
 const display = document.querySelector(".screen");
 
 const updateDisplay = function(e)
 {
-  displayValue = e.target.textContent;
   if (e.target.textContent === "Clear")
   {
     displayValue = "";
-    return display.textContent = "";
+    firstNumber = "";
+    operator = "";
+    display.textContent = displayValue;
+  }
+  else if (/^[0-9]+$/.test(e.target.textContent))
+  {
+    if (lastButtonPressed === "Enter")
+    {
+      displayValue = "";
+      display.textContent = displayValue;
+    }
+    displayValue = e.target.textContent;
+    display.textContent += displayValue;
+  }
+  else if (/^[+-/*]+$/.test(e.target.textContent))
+  {
+    if (/^[0-9]+$/.test(lastButtonPressed))
+    {
+      if (firstNumber === "" && secondNumber === "")
+      {
+          firstNumber = display.textContent;
+      }
+      if (firstNumber !== "" && secondNumber === "")
+      {
+        secondNumber = display.textContent;
+        displayValue = operate(operator, firstNumber, secondNumber)
+        display.textContent = displayValue;
+      }
+    }
+  }
+  else if (e.target.textContent === "Enter")
+  {
+    if (firstNumber !== "" && secondNumber !== "" && operator !== "")
+    {
+      displayValue = operate(operator, firstNumber, secondNumber);
+      display.textContent = displayValue;
+      firstNumber = secondNumber;
+      secondNumber = "";
+      operator = "";
+    }
+  }
+  lastButtonPressed = e.target.textContent;
   }  
-  display.textContent += displayValue;
-}
 
 const add = function(num1, num2) {
 	return num1 + num2;
