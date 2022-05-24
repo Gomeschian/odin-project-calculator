@@ -30,8 +30,8 @@ const updateDisplay = function(e)
     firstNumber = "";
     displayValue = secondNumber;
     display.textContent = (displayValue);
+    displayValue = "";
   }
-  displayValue = "";
   }  
 
 const add = function(num1, num2) {
