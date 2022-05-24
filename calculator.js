@@ -31,7 +31,7 @@ const updateDisplay = function(e)
     displayValue = secondNumber;
     display.textContent = (displayValue);
   }
-  lastButtonPressed = e.target.textContent;
+  displayValue = "";
   }  
 
 const add = function(num1, num2) {
@@ -49,7 +49,7 @@ const multiply = function(number1, number2) {
 };
 
 const divide = function(number1, number2) {
-	return (number1/number2) + (number1 % number2);
+	return (number1/number2);
 };
 
 const operate = function(operator, number1, number2) {
