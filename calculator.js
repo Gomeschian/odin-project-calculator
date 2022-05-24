@@ -10,47 +10,26 @@ const updateDisplay = function(e)
 {
   if (e.target.textContent === "Clear")
   {
-    displayValue = "";
-    firstNumber = "";
-    operator = "";
-    display.textContent = displayValue;
+    clearCalculator();
   }
   else if (/^[0-9]+$/.test(e.target.textContent))
   {
-    if (lastButtonPressed === "Enter")
-    {
-      displayValue = "";
-      display.textContent = displayValue;
-    }
-    displayValue = e.target.textContent;
-    display.textContent += displayValue;
+      displayValue += e.target.textContent;
+      display.textContent = displayValue; 
   }
   else if (/^[+-/*]+$/.test(e.target.textContent))
   {
-    if (/^[0-9]+$/.test(lastButtonPressed))
-    {
-      if (firstNumber === "" && secondNumber === "")
-      {
-          firstNumber = display.textContent;
-      }
-      if (firstNumber !== "" && secondNumber === "")
-      {
-        secondNumber = display.textContent;
-        displayValue = operate(operator, firstNumber, secondNumber)
-        display.textContent = displayValue;
-      }
-    }
+    operator = e.target.textContent;
+    firstNumber = display.textContent;
+    displayValue = "";
   }
   else if (e.target.textContent === "Enter")
   {
-    if (firstNumber !== "" && secondNumber !== "" && operator !== "")
-    {
-      displayValue = operate(operator, firstNumber, secondNumber);
-      display.textContent = displayValue;
-      firstNumber = secondNumber;
-      secondNumber = "";
-      operator = "";
-    }
+    secondNumber = display.textContent;
+    secondNumber = operate(operator, Number(firstNumber), Number(secondNumber))
+    firstNumber = "";
+    displayValue = secondNumber;
+    display.textContent = (displayValue);
   }
   lastButtonPressed = e.target.textContent;
   }  
@@ -94,7 +73,15 @@ const operate = function(operator, number1, number2) {
   {
     return divide(number1, number2);
   }
+}
+const clearCalculator = function()
+{ 
+  displayValue = "";
+  firstNumber = "";
+  operator = "";
+  display.textContent = displayValue;
 };
+
 keys.forEach(key => key.addEventListener("click",(e) =>
 {
   return updateDisplay(e);
