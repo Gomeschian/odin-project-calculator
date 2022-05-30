@@ -14,14 +14,25 @@ const updateDisplay = function(e)
   }
   else if (/^[0-9]+$/.test(e.target.textContent))
   {
-      displayValue += e.target.textContent;
-      display.textContent = displayValue; 
+    displayValue += e.target.textContent;
+    display.textContent = displayValue;
   }
   else if (/^[+-/*]+$/.test(e.target.textContent))
   {
-    operator = e.target.textContent;
-    firstNumber = display.textContent;
-    displayValue = "";
+    if (secondNumber !== "" & operator !== "")
+    {
+      secondNumber = displayValue;
+      operator = e.target.textContent;
+      secondNumber = operate(operator, Number(firstNumber), Number(secondNumber))
+      displayValue = secondNumber;
+      display.textContent = displayValue;
+    }
+    else 
+    {
+      operator = e.target.textContent;
+      firstNumber = display.textContent;
+      displayValue = "";
+    }
   }
   else if (e.target.textContent === "Enter")
   {
@@ -29,8 +40,9 @@ const updateDisplay = function(e)
     secondNumber = operate(operator, Number(firstNumber), Number(secondNumber))
     firstNumber = "";
     displayValue = secondNumber;
-    display.textContent = (displayValue);
+    display.textContent = displayValue;
     displayValue = "";
+    operator = "";
   }
   }  
 
@@ -78,6 +90,7 @@ const clearCalculator = function()
 { 
   displayValue = "";
   firstNumber = "";
+  secondNumber = "";
   operator = "";
   display.textContent = displayValue;
 };
