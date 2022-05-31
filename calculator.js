@@ -34,6 +34,10 @@ const updateDisplay = function(e)
       {
         operator = e.target.textContent;
         displayValue = "";
+        if (nextNumber === "")
+        {
+          nextNumber = storedNumber;
+        }
       }
       else
       {
@@ -47,12 +51,15 @@ const updateDisplay = function(e)
   }
   else if (e.target.textContent === "Enter")
   {
-    runningTotal = operate(operator, Number(storedNumber), Number(nextNumber));
-    displayValue = runningTotal;
-    display.textContent = displayValue;
-    displayValue = "";
-    storedNumber = runningTotal;
-    operator = "";
+    if (operator !== "" && nextNumber !== "")
+    {
+      runningTotal = operate(operator, Number(storedNumber), Number(nextNumber));
+      displayValue = runningTotal;
+      display.textContent = displayValue;
+      displayValue = "";
+      storedNumber = runningTotal;
+      operator = "";
+    }
   }
   }  
 
