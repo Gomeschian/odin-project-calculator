@@ -1,5 +1,6 @@
 let runningTotal = "";
 let displayValue = "";
+let storedNumber = "";
 let nextNumber = "";
 let operator = "";
 let lastButtonPressed = "";
@@ -16,18 +17,17 @@ const updateDisplay = function(e)
   {
     displayValue += e.target.textContent;
     display.textContent = displayValue;
+    nextNumber = displayValue;
   }
   else if (/^[+-/*]+$/.test(e.target.textContent))
   {
       operator = e.target.textContent;
-      runningTotal = display.textContent;
-      nextNumber = 0;
+      storedNumber = nextNumber;
       displayValue = "";
   }
   else if (e.target.textContent === "Enter")
   {
-    nextNumber = display.textContent;
-    runningTotal = operate(operator, Number(runningTotal), Number(nextNumber));
+    runningTotal = operate(operator, Number(storedNumber), Number(nextNumber));
     displayValue = runningTotal;
     display.textContent = displayValue;
     displayValue = "";
@@ -78,6 +78,7 @@ const operate = function(operator, number1, number2) {
 const clearCalculator = function()
 { 
   displayValue = "";
+  storedNumber = "";
   nextNumber = "";
   runningTotal = "";
   operator = "";
