@@ -1,6 +1,6 @@
+let runningTotal = "";
 let displayValue = "";
-let firstNumber = "";
-let secondNumber = "";
+let nextNumber = "";
 let operator = "";
 let lastButtonPressed = "";
 const keys = Array.from(document.querySelectorAll(".key"));
@@ -19,27 +19,16 @@ const updateDisplay = function(e)
   }
   else if (/^[+-/*]+$/.test(e.target.textContent))
   {
-    if (secondNumber !== "" & operator !== "")
-    {
-      secondNumber = displayValue;
       operator = e.target.textContent;
-      secondNumber = operate(operator, Number(firstNumber), Number(secondNumber))
-      displayValue = secondNumber;
-      display.textContent = displayValue;
-    }
-    else 
-    {
-      operator = e.target.textContent;
-      firstNumber = display.textContent;
+      runningTotal = display.textContent;
+      nextNumber = 0;
       displayValue = "";
-    }
   }
   else if (e.target.textContent === "Enter")
   {
-    secondNumber = display.textContent;
-    secondNumber = operate(operator, Number(firstNumber), Number(secondNumber))
-    firstNumber = "";
-    displayValue = secondNumber;
+    nextNumber = display.textContent;
+    runningTotal = operate(operator, Number(runningTotal), Number(nextNumber));
+    displayValue = runningTotal;
     display.textContent = displayValue;
     displayValue = "";
     operator = "";
@@ -89,8 +78,8 @@ const operate = function(operator, number1, number2) {
 const clearCalculator = function()
 { 
   displayValue = "";
-  firstNumber = "";
-  secondNumber = "";
+  nextNumber = "";
+  runningTotal = "";
   operator = "";
   display.textContent = displayValue;
 };
