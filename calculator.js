@@ -15,14 +15,22 @@ const updateDisplay = function(e)
   }
   else if (/^[0-9]+$/.test(e.target.textContent))
   {
-    displayValue += e.target.textContent;
-    display.textContent = displayValue;
-    nextNumber = displayValue;
+    if (storedNumber === "")
+    {
+      displayValue += e.target.textContent;
+      display.textContent = displayValue;
+      storedNumber = displayValue;
+    }
+    else
+    {
+      displayValue += e.target.textContent;
+      display.textContent = displayValue;
+      nextNumber = displayValue;
+    }
   }
   else if (/^[+-/*]+$/.test(e.target.textContent))
   {
       operator = e.target.textContent;
-      storedNumber = nextNumber;
       displayValue = "";
   }
   else if (e.target.textContent === "Enter")
@@ -31,7 +39,7 @@ const updateDisplay = function(e)
     displayValue = runningTotal;
     display.textContent = displayValue;
     displayValue = "";
-    operator = "";
+    storedNumber = runningTotal;
   }
   }  
 
