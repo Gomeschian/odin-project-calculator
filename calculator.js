@@ -6,6 +6,7 @@ let operator = "";
 let lastButtonPressed = "";
 const keys = Array.from(document.querySelectorAll(".key"));
 const display = document.querySelector(".screen");
+const maxDisplayableNumber = 999999999999;
 
 const updateDisplay = function(e)
 {
@@ -64,6 +65,10 @@ const updateDisplay = function(e)
       operator = "";
     }
   }
+  if (display.textContent >= maxDisplayableNumber)
+{
+  display.textContent = "OVERFLOW";
+}
   }  
 
 const add = function(num1, num2) {
@@ -120,3 +125,5 @@ keys.forEach(key => key.addEventListener("click",(e) =>
 {
   return updateDisplay(e);
 }));
+
+
